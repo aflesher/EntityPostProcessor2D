@@ -8,7 +8,7 @@ namespace EntityPostProcessor
 	internal class EntityPostProcessorBuilder
 	{
 
-		[MenuItem("GameObject/Create Other/EntityPostProcessor/PostProcesssor", false, 1)]
+		[MenuItem("GameObject/EntityPostProcessor2D/PostProcesssor", false, 1)]
 		static void CreatePostProcessor()
 		{
 			GameObject gameObject = new GameObject("EntityPostProcessor");

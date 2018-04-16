@@ -2,7 +2,7 @@
 
 namespace EntityPostProcessor
 {
-	public class SortingLayerAttribute : PropertyAttribute
+	public class TextureSizeAttribute : PropertyAttribute
 	{
 
 	}
