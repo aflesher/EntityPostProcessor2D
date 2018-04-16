@@ -6,30 +6,18 @@ namespace EntityPostProcessor
 {
 	public class Entity : MonoBehaviour
 	{
-
-		[Header("Render Ouput")]
-		[Tooltip("The size of the texture in pixels")]
 		public float pixelsPerUnit = 1;
-		[SortingLayer]
 		public int sortingLayer = 0;
 		public int orderInLayer = 0;
 		public Material material;
-		[TextureSize]
 		public int textureWidth = 128;
-		[TextureSize]
 		public int textureHeight = 128;
-
-
-		[Header("Post Processor")]
 		[SerializeField]
 		EntityPostProcessor postProcessorRef;
 
 		public EntityPostProcessor postProcessor { get; private set; }
 
-		[Header("Advanced")]
-		[Tooltip("Local position of the render output texture")]
 		public Vector2 renderOuputLocalPosition;
-		[Space(10)]
 		public GameObject renderSource;
 		public bool showCaptureRect;
 		public bool autoEnableDisablePostProcessor = true;
