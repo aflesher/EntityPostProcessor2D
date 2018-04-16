@@ -57,6 +57,12 @@ namespace EntityPostProcessor
 				entity.renderOuputLocalPosition = EditorGUILayout.Vector2Field("Render Output Local Position", entity.renderOuputLocalPosition);
 				entity.showCaptureRect = EditorGUILayout.Toggle("Show Capture Rect", entity.showCaptureRect);
 				entity.autoEnableDisablePostProcessor = EditorGUILayout.Toggle("Auto Enable/Disable PP", entity.autoEnableDisablePostProcessor);
+				entity.filterMode = (FilterMode)EditorGUILayout.EnumPopup("Filter Mode", entity.filterMode);
+
+				int[] depthValues = { 0, 16, 24 };
+				string[] depthNames = depthValues.Select(p => p.ToString()).ToArray();
+
+				entity.depth = EditorGUILayout.IntPopup("Depth", entity.depth, depthNames, depthValues);
 			}
 
 			serializedObject.ApplyModifiedProperties();

@@ -276,7 +276,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1261129310}
   - component: {fileID: 1261129309}
-  m_Layer: 0
+  - component: {fileID: 1261129311}
+  m_Layer: 9
   m_Name: Entity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,11 +296,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pixelsPerUnit: 1
-  sortingLayer: 0
+  sortingLayer: -1282431341
   orderInLayer: 0
   material: {fileID: 1664966599}
-  textureWidth: 128
-  textureHeight: 128
+  textureWidth: 256
+  textureHeight: 256
   postProcessorRef: {fileID: 114508954943857822, guid: 5151b0d584fef4f9590eff368e16b4ae,
     type: 2}
   renderOuputLocalPosition: {x: 0, y: 0}
@@ -320,6 +321,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1261129311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1261129308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c94cb7a86285484e86495373d393261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showOutline: 0
+  showDisplacement: 0
 --- !u!21 &1664966599
 Material:
   serializedVersion: 6
@@ -362,7 +376,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2054529571}
   - component: {fileID: 2054529570}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RenderSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}

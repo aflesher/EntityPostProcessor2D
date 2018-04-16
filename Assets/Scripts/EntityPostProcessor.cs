@@ -25,11 +25,11 @@ namespace EntityPostProcessor
 			}
 		}
 
-		public void SetupTexture(Vector2Int size)
+		public void SetupTexture(Vector2Int size, int depth, FilterMode filterMode)
 		{
-			renderTexture = new RenderTexture(size.x, size.y, 24) {
+			renderTexture = new RenderTexture(size.x, size.y, depth) {
 				name = "Target Texture",
-				filterMode = FilterMode.Trilinear,
+				filterMode = filterMode,
 				antiAliasing = QualitySettings.antiAliasing > 0 ? QualitySettings.antiAliasing : 1
 			};
 

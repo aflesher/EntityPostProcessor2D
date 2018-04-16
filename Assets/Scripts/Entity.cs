@@ -22,6 +22,9 @@ namespace EntityPostProcessor
 		public bool showCaptureRect;
 		public bool autoEnableDisablePostProcessor = true;
 
+		public FilterMode filterMode = FilterMode.Trilinear;
+		public int depth = 24;
+
 		static float curX;
 		static string layerName = "EntityPostProcessor";
 
@@ -54,7 +57,7 @@ namespace EntityPostProcessor
 			);
 
 			curX += textureWidth;
-			postProcessor.SetupTexture(new Vector2Int(textureWidth, textureHeight));
+			postProcessor.SetupTexture(new Vector2Int(textureWidth, textureHeight), depth, filterMode);
 			postProcessor.cullingMask = LayerMask.GetMask(layerName);
 			postProcessor.name = string.Format("{0}PostProcessor", gameObject.name);
 
