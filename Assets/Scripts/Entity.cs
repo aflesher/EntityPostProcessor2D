@@ -21,7 +21,10 @@ namespace EntityPostProcessor
 
 
 		[Header("Post Processor")]
-		public EntityPostProcessor postProcessor;
+		[SerializeField]
+		EntityPostProcessor postProcessorRef;
+
+		public EntityPostProcessor postProcessor { get; private set; }
 
 		[Header("Advanced")]
 		[Tooltip("Local position of the render output texture")]
@@ -29,6 +32,7 @@ namespace EntityPostProcessor
 		[Space(10)]
 		public GameObject renderSource;
 		public bool showCaptureRect;
+		public bool autoEnableDisablePostProcessor = true;
 
 		static float curX;
 		static string layerName = "EntityPostProcessor";
@@ -38,8 +42,7 @@ namespace EntityPostProcessor
 		void Awake()
 		{
 			int layer = LayerMask.NameToLayer(layerName);
-			if (layer == -1) {
-				Debug.LogError(string.Format("WholeEffects2D requires layer [{0}]", layerName));
+			if (!Validate(layer)) {
 				return;
 			}
 
@@ -57,7 +60,7 @@ namespace EntityPostProcessor
 			renderOutput.transform.localScale = new Vector3(textureWidth * pixelsPerUnit, textureHeight * pixelsPerUnit, 1);
 
 			postProcessor = Instantiate(
-				postProcessor,
+				postProcessorRef,
 				new Vector3(curX + (textureWidth * .5f) + 1, textureHeight * .5f, -10),
 				Quaternion.identity
 			);
@@ -72,6 +75,21 @@ namespace EntityPostProcessor
 			renderSource.layer = LayerMask.NameToLayer(layerName);
 
 			renderOutputMeshRenderer.material.SetTexture("_MainTex", postProcessor.renderTexture);
+		}
+
+		bool Validate(int layer)
+		{
+			if (layer == -1) {
+				Debug.LogError(string.Format("EntityPostProcessor2D requires layer [{0}]", layerName));
+				return false;
+			}
+
+			if (postProcessorRef == null) {
+				Debug.LogError("EntityPostProcessor2D requires a post processor");
+				return false;
+			}
+
+			return true;
 		}
 
 		void OnDrawGizmos()
@@ -89,6 +107,39 @@ namespace EntityPostProcessor
 				Gizmos.DrawLine(new Vector3(xMax, yMax), new Vector3(xMax, yMin));
 				Gizmos.DrawLine(new Vector3(xMax, yMin), new Vector3(xMin, yMin));
 
+			}
+		}
+
+		void OnEnable()
+		{
+			if (autoEnableDisablePostProcessor) {
+				SetPostProcessorEnabled(true);
+			}
+		}
+
+		void OnDisable()
+		{
+			if (autoEnableDisablePostProcessor) {
+				SetPostProcessorEnabled(false);
+			}
+		}
+
+		/// <summary>
+		/// Activates/Deactivates the Post Processor GameObject. If autoEnableDisablePostProcessor is set to true this
+		/// will be automatically called when the entity gameobject is enabled or disabled.
+		/// </summary>
+		/// <param name="enabled">If set to <c>true</c> enabled.</param>
+		public void SetPostProcessorEnabled(bool enabled)
+		{
+			if (postProcessor != null) {
+				postProcessor.gameObject.SetActive(enabled);
+			}
+		}
+
+		void OnDestroy()
+		{
+			if (postProcessor != null) {
+				Destroy(postProcessor.gameObject);
 			}
 		}
 	}
