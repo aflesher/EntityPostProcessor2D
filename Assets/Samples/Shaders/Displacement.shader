@@ -1,4 +1,4 @@
-﻿Shader "WholeEffects2D/Displacement"
+﻿Shader "EntityPostProcessor2D/Displacement"
 {
 	Properties
 	{

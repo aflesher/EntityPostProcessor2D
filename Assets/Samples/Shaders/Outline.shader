@@ -1,4 +1,4 @@
-﻿Shader "WholeEffects2D/Outline"
+﻿Shader "EntityPostProcessor2D/Outline"
 {
 	Properties
 	{
