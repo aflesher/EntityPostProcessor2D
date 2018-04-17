@@ -64,6 +64,10 @@ namespace EntityPostProcessor
 			renderSource.transform.parent = postProcessor.transform;
 			renderSource.transform.localPosition = new Vector3(renderOuputLocalPosition.x, renderOuputLocalPosition.y, 10);
 			renderSource.layer = LayerMask.NameToLayer(layerName);
+			Transform[] children = renderSource.GetComponentsInChildren<Transform>();
+			foreach (Transform child in children) {
+				child.gameObject.layer = renderSource.layer;
+			}
 
 			renderOutputMeshRenderer.material.SetTexture("_MainTex", postProcessor.renderTexture);
 		}
