@@ -68,7 +68,7 @@
 				outlineAlpha = max(sampleAlpha, outlineAlpha);
 			}
 			outlineAlpha *= _Outline_OutlineColor.a;
-			col.rgb += (_Outline_OutlineColor.rgb * (outlineAlpha - col.a));
+			col.rgb += (_Outline_OutlineColor.rgb * max((outlineAlpha - col.a), 0));
 			col.a = max(col.a, outlineAlpha);
 
 			#endif

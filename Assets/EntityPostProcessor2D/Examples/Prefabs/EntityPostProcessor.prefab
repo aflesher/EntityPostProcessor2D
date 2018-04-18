@@ -21,9 +21,6 @@ GameObject:
   - component: {fileID: 4578338408733490}
   - component: {fileID: 114508954943857822}
   - component: {fileID: 20705511439736980}
-  - component: {fileID: 114745662941019928}
-  - component: {fileID: 114053513004362270}
-  - component: {fileID: 114941518181359222}
   m_Layer: 0
   m_Name: EntityPostProcessor
   m_TagString: Untagged
@@ -80,18 +77,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &114053513004362270
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1401165075355744}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f07a940b3554425187952c0f2b92b9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 447778a25ef4c4c3ca7e5733e6b0f521, type: 2}
 --- !u!114 &114508954943857822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -103,28 +88,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 945824201c67046fba47ff2b867d7276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114745662941019928
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1401165075355744}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da2741f3170d746528a77540fc75f9a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 09dae6797bcaa448f88b5ea1ba4eaf63, type: 2}
---- !u!114 &114941518181359222
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1401165075355744}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: caa6cb379e3474565a17c62ecda19a83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: d2bdd1f1c17284edfb6abbb2f4986cac, type: 2}
-  speed: 1
+  outlineColor: {r: 0.897, g: 0.5010828, b: 0, a: 0.978}
+  outlineSize: 5
+  enableOutline: 1
