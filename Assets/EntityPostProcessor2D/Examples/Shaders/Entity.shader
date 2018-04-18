@@ -8,6 +8,7 @@
 	CGINCLUDE
 		#pragma multi_compile __ OUTLINE
 		#pragma multi_compile __ DISSOLVE
+		#pragma multi_compile __ COLORED
 
 		#include "UnityCG.cginc"
 
@@ -22,6 +23,9 @@
 		float _Dissolve_Progress;
 		float _Dissolve_EdgeSize;
 		fixed4 _Dissolve_EdgeColor;
+
+		// color
+		fixed4 _Color_Color;
 
 		struct appdata
 		{
@@ -47,6 +51,15 @@
 		{
 			float2 uv = i.uv;
 			fixed4 col = tex2D(_MainTex, uv);
+			float alpha = 1;
+
+			#if COLORED
+
+			col.rgb *= _Color_Color.rgb;
+			alpha = _Color_Color.a;
+			col.a *= alpha;
+
+			#endif
 
 			#if OUTLINE
 
@@ -71,7 +84,7 @@
 
 			float outlineAlpha = 0;
 			for (int d = 0; d < 16; d++) {
-				float sampleAlpha = tex2D(_MainTex, uv + outlineVecs[d] * _MainTex_TexelSize * _Outline_OutlineSize).a;
+				float sampleAlpha = tex2D(_MainTex, uv + outlineVecs[d] * _MainTex_TexelSize * _Outline_OutlineSize).a * alpha;
 				outlineAlpha = max(sampleAlpha, outlineAlpha);
 			}
 			outlineAlpha *= _Outline_OutlineColor.a;

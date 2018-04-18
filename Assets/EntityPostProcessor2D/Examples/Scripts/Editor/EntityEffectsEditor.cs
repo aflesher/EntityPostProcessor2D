@@ -11,6 +11,7 @@ namespace EntityPostProcessor
 
 		bool showOutline = false;
 		bool showDissolve = false;
+		bool showColor = false;
 		MonoScript script;
 
 		void OnEnable()
@@ -29,6 +30,17 @@ namespace EntityPostProcessor
 			EditorGUI.EndDisabledGroup();
 
 			EditorGUILayout.Space();
+
+			EditorGUILayout.BeginHorizontal();
+			showColor = EditorGUILayout.Foldout(showColor, "Color");
+			entityEffects.colorEnable = EditorGUILayout.Toggle(entityEffects.colorEnable);
+			EditorGUILayout.EndHorizontal();
+			if (showColor) {
+				EditorGUI.BeginDisabledGroup(!entityEffects.colorEnable);
+				entityEffects.colorColor = EditorGUILayout.ColorField("Color", entityEffects.colorColor);
+				EditorGUI.EndDisabledGroup();
+			}
+
 			EditorGUILayout.BeginHorizontal();
 			showOutline = EditorGUILayout.Foldout(showOutline, "Outline");
 			entityEffects.enableOutline = EditorGUILayout.Toggle(entityEffects.enableOutline);

@@ -11,15 +11,17 @@ namespace EntityPostProcessor
 		public static readonly int ShaderIdDissolveEdgeColor = Shader.PropertyToID("_Dissolve_EdgeColor");
 		public static readonly int ShaderIdOutlineColor = Shader.PropertyToID("_Outline_OutlineColor");
 		public static readonly int ShaderIdOutlineSize = Shader.PropertyToID("_Outline_OutlineSize");
+		public static readonly int ShaderIdColorColor = Shader.PropertyToID("_Color_Color");
 
 		public static readonly string ShaderKeywordDissolve = "DISSOLVE";
 		public static readonly string ShaderKeywordOutline = "OUTLINE";
+		public static readonly string ShaderKeywordColor = "COLORED";
 
 		Material material;
 
 		#region outline color
 		[SerializeField]
-		public Color _outlineColor;
+		Color _outlineColor;
 		public Color outlineColor
 		{
 			get { return _outlineColor; }
@@ -71,7 +73,7 @@ namespace EntityPostProcessor
 
 		#region dissolve edge color
 		[SerializeField]
-		public Color _dissolveEdgeColor;
+		Color _dissolveEdgeColor;
 		public Color dissolveEdgeColor
 		{
 			get { return _dissolveEdgeColor; }
@@ -101,6 +103,42 @@ namespace EntityPostProcessor
 		}
 		#endregion
 
+		#region color enable
+		[SerializeField]
+		bool _colorEnable;
+		public bool colorEnable
+		{
+			get { return _colorEnable; }
+			set
+			{
+				_colorEnable = value;
+				if (material != null) {
+					if (_colorEnable) {
+						material.EnableKeyword(ShaderKeywordColor);
+					} else {
+						material.DisableKeyword(ShaderKeywordColor);
+					}
+				}
+			}
+		}
+		#endregion
+
+		#region color color
+		[SerializeField]
+		Color _colorColor;
+		public Color colorColor
+		{
+			get { return _colorColor; }
+			set
+			{
+				_colorColor = value;
+				if (material != null) {
+					material.SetColor(ShaderIdColorColor, _colorColor);
+				}
+			}
+		}
+		#endregion
+
 		public float dissolveSpeed;
 
 		bool dissolving = false;
@@ -111,6 +149,8 @@ namespace EntityPostProcessor
 			material = new Material(Shader.Find("EntityPostProcessor2D/Entity"));
 			material.DisableKeyword(ShaderKeywordDissolve);
 
+			colorEnable = colorEnable;
+			colorColor = colorColor;
 			enableOutline = enableOutline;
 			outlineColor = outlineColor;
 			outlineSize = outlineSize;
