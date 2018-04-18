@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DisplacementEffect : EntityEffect
+namespace EntityPostProcessor
 {
+	public class OutlineEffect : EntityEffect
+	{
 
+	}
 }

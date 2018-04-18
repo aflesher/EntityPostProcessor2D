@@ -28,6 +28,8 @@ namespace EntityPostProcessor
 		static float curX;
 		static string layerName = "EntityPostProcessor";
 
+		public GameObject renderOutput { get; private set; }
+		MeshRenderer renderOutputMeshRenderer;
 
 		// Use this for initialization
 		void Awake()
@@ -37,8 +39,8 @@ namespace EntityPostProcessor
 				return;
 			}
 
-			GameObject renderOutput = GameObject.CreatePrimitive(PrimitiveType.Quad);
-			MeshRenderer renderOutputMeshRenderer = renderOutput.GetComponent<MeshRenderer>();
+			renderOutput = GameObject.CreatePrimitive(PrimitiveType.Quad);
+			renderOutputMeshRenderer = renderOutput.GetComponent<MeshRenderer>();
 			renderOutput.name = "RenderOutput";
 			renderOutput.GetComponent<MeshRenderer>().material = material;
 			renderOutput.transform.parent = gameObject.transform;
@@ -48,7 +50,7 @@ namespace EntityPostProcessor
 			renderOutputMeshRenderer.sortingOrder = orderInLayer;
 			renderOutputMeshRenderer.sortingLayerID = sortingLayer;
 			renderOutput.transform.localPosition = renderSource.transform.localPosition - (Vector3)renderOuputLocalPosition;
-			renderOutput.transform.localScale = new Vector3(textureWidth * pixelsPerUnit, textureHeight * pixelsPerUnit, 1);
+			renderOutput.transform.localScale = new Vector3(textureWidth / pixelsPerUnit, textureHeight / pixelsPerUnit, 1);
 
 			postProcessor = Instantiate(
 				postProcessorRef,
@@ -89,13 +91,13 @@ namespace EntityPostProcessor
 
 		void OnDrawGizmos()
 		{
-			if (showCaptureRect) {
+			if (showCaptureRect && renderSource != null) {
 				Gizmos.color = Color.blue;
-				Vector2 size = new Vector2((textureWidth * pixelsPerUnit * .5f), (textureHeight * pixelsPerUnit * .5f));
-				float xMin = -size.x + renderOuputLocalPosition.x;
-				float yMin = -size.y + renderOuputLocalPosition.y;
-				float xMax = size.x + renderOuputLocalPosition.x;
-				float yMax = size.y + renderOuputLocalPosition.y;
+				Vector2 size = new Vector2((textureWidth * .5f), (textureHeight * .5f));
+				float xMin = -size.x - renderOuputLocalPosition.x + renderSource.transform.position.x;
+				float yMin = -size.y - renderOuputLocalPosition.y + renderSource.transform.position.y;
+				float xMax = size.x - renderOuputLocalPosition.x + renderSource.transform.position.x;
+				float yMax = size.y - renderOuputLocalPosition.y + renderSource.transform.position.y;
 
 				Gizmos.DrawLine(new Vector3(xMin, yMin), new Vector3(xMin, yMax));
 				Gizmos.DrawLine(new Vector3(xMin, yMax), new Vector3(xMax, yMax));
@@ -129,6 +131,15 @@ namespace EntityPostProcessor
 			if (postProcessor != null) {
 				postProcessor.gameObject.SetActive(enabled);
 			}
+		}
+
+		/// <summary>
+		/// Shows/Hides the render output. Use this to show/hide the entity from the main camera
+		/// </summary>
+		/// <param name="visible"></param>
+		public void SetRenderOutputVisible(bool visible)
+		{
+			renderOutputMeshRenderer.enabled = visible;
 		}
 
 		void OnDestroy()
