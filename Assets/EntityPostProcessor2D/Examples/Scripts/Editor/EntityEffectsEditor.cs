@@ -48,7 +48,6 @@ namespace EntityPostProcessor
 			}
 
 			serializedObject.ApplyModifiedProperties();
-			entityEffects.SetMaterialProperties();
 
 			EditorUtility.SetDirty(target);
 		}
