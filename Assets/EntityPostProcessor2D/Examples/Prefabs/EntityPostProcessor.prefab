@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4578338408733490}
   - component: {fileID: 114508954943857822}
+  - component: {fileID: 114924713617023556}
   - component: {fileID: 20705511439736980}
   m_Layer: 0
   m_Name: EntityPostProcessor
@@ -88,6 +89,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 945824201c67046fba47ff2b867d7276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineColor: {r: 0.897, g: 0.5010828, b: 0, a: 0.978}
+--- !u!114 &114924713617023556
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1401165075355744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21484febb88c9420683084d5a9bee65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineColor: {r: 0.28166097, g: 0.056444637, b: 0.85294116, a: 0.984}
   outlineSize: 5
   enableOutline: 1
+  dissolveSpeed: 0.5
+  dissolveEdgeSize: 0.05
+  dissolveEdgeColor: {r: 0.9852941, g: 0.9997837, b: 0.9997837, a: 0.959}
