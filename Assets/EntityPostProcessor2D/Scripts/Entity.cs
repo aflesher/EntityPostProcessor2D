@@ -16,9 +16,9 @@ namespace EntityPostProcessor
 		EntityPostProcessor postProcessorRef;
 
 		public EntityPostProcessor postProcessor { get; private set; }
+		public EntityRenderSource renderSource { get; private set; }
 
 		public Vector2 renderOuputLocalPosition;
-		public GameObject renderSource;
 		public bool showCaptureRect;
 		public bool autoEnableDisablePostProcessor = true;
 
@@ -35,9 +35,12 @@ namespace EntityPostProcessor
 		void Awake()
 		{
 			int layer = LayerMask.NameToLayer(layerName);
+			renderSource = GetComponentInChildren<EntityRenderSource>();
 			if (!Validate(layer)) {
 				return;
 			}
+
+			renderSource.entity = this;
 
 			renderOutput = GameObject.CreatePrimitive(PrimitiveType.Quad);
 			renderOutputMeshRenderer = renderOutput.GetComponent<MeshRenderer>();
@@ -65,10 +68,10 @@ namespace EntityPostProcessor
 
 			renderSource.transform.parent = postProcessor.transform;
 			renderSource.transform.localPosition = new Vector3(renderOuputLocalPosition.x, renderOuputLocalPosition.y, 10);
-			renderSource.layer = LayerMask.NameToLayer(layerName);
+			renderSource.gameObject.layer = LayerMask.NameToLayer(layerName);
 			Transform[] children = renderSource.GetComponentsInChildren<Transform>();
 			foreach (Transform child in children) {
-				child.gameObject.layer = renderSource.layer;
+				child.gameObject.layer = renderSource.gameObject.layer;
 			}
 
 			renderOutputMeshRenderer.material.SetTexture("_MainTex", postProcessor.renderTexture);
@@ -86,18 +89,27 @@ namespace EntityPostProcessor
 				return false;
 			}
 
+			if (renderSource == null) {
+				Debug.LogError("EntityPostProcessor2D is missing RenderSource child element");
+				return false;
+			}
+
 			return true;
 		}
 
 		void OnDrawGizmos()
 		{
-			if (showCaptureRect && renderSource != null) {
+			EntityRenderSource _renderSource = renderSource;
+			if (_renderSource == null) {
+				_renderSource = GetComponentInChildren<EntityRenderSource>();
+			}
+			if (showCaptureRect && _renderSource != null) {
 				Gizmos.color = Color.blue;
 				Vector2 size = new Vector2((textureWidth * .5f), (textureHeight * .5f));
-				float xMin = -size.x - renderOuputLocalPosition.x + renderSource.transform.position.x;
-				float yMin = -size.y - renderOuputLocalPosition.y + renderSource.transform.position.y;
-				float xMax = size.x - renderOuputLocalPosition.x + renderSource.transform.position.x;
-				float yMax = size.y - renderOuputLocalPosition.y + renderSource.transform.position.y;
+				float xMin = -size.x - renderOuputLocalPosition.x + _renderSource.transform.position.x;
+				float yMin = -size.y - renderOuputLocalPosition.y + _renderSource.transform.position.y;
+				float xMax = size.x - renderOuputLocalPosition.x + _renderSource.transform.position.x;
+				float yMax = size.y - renderOuputLocalPosition.y + _renderSource.transform.position.y;
 
 				Gizmos.DrawLine(new Vector3(xMin, yMin), new Vector3(xMin, yMax));
 				Gizmos.DrawLine(new Vector3(xMin, yMax), new Vector3(xMax, yMax));

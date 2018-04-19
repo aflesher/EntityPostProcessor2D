@@ -7,7 +7,7 @@ namespace EntityPostProcessor
 
 	internal class EntityBuilder
 	{
-		
+
 		[MenuItem("GameObject/EntityPostProcessor2D/Entity", false, 1)]
 		static void CreateEntity()
 		{
@@ -16,7 +16,7 @@ namespace EntityPostProcessor
 
 			GameObject sourceObject = new GameObject("RenderSource");
 			sourceObject.transform.parent = gameObject.transform;
-			gameObject.GetComponent<Entity>().renderSource = sourceObject;
+			sourceObject.AddComponent<EntityRenderSource>();
 			gameObject.GetComponent<Entity>().material = new Material(Shader.Find("Sprites/Default"));
 
 			Selection.activeGameObject = gameObject;

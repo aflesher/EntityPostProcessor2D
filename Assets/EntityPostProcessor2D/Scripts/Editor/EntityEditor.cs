@@ -64,7 +64,6 @@ namespace EntityPostProcessor
 					entity.renderOuputLocalPosition
 				);
 				entity.showCaptureRect = EditorGUILayout.Toggle("Show Capture Rect", entity.showCaptureRect);
-				entity.renderSource = (GameObject)EditorGUILayout.ObjectField("Render Source", entity.renderSource, typeof(GameObject), true);
 				entity.autoEnableDisablePostProcessor = EditorGUILayout.Toggle(
 					new GUIContent(
 						"Auto Enable/Disable PP",
