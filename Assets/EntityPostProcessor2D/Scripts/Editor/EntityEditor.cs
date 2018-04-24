@@ -53,17 +53,18 @@ namespace EntityPostProcessor
 				true
 			);
 
+			entity.renderOuputLocalPosition = EditorGUILayout.Vector2Field(
+				new GUIContent(
+					"Source Capture Offset",
+					"Changes the position of the source object within the capture camera"
+				),
+				entity.renderOuputLocalPosition
+			);
+			entity.showCaptureRect = EditorGUILayout.Toggle("Show Capture Rect", entity.showCaptureRect);
+
 			EditorGUILayout.Space();
 			showAdvanced = EditorGUILayout.Foldout(showAdvanced, "Advanced");
 			if (showAdvanced) {
-				entity.renderOuputLocalPosition = EditorGUILayout.Vector2Field(
-					new GUIContent(
-						"Source Capture Offset",
-						"Changes the position of the source object within the capture camera"
-					),
-					entity.renderOuputLocalPosition
-				);
-				entity.showCaptureRect = EditorGUILayout.Toggle("Show Capture Rect", entity.showCaptureRect);
 				entity.autoEnableDisablePostProcessor = EditorGUILayout.Toggle(
 					new GUIContent(
 						"Auto Enable/Disable PP",
