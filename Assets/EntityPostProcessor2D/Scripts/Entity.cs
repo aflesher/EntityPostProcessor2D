@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace EntityPostProcessor
 {
+	/// <summary>
+	/// Automatically creates a Camera -> RenderTexture setup for this entity so that
+	/// shaders and post processing effects can be applied to the gameObject as a whole.
+	/// </summary>
 	public class Entity : MonoBehaviour
 	{
 		public float pixelsPerUnit = 1;
@@ -62,9 +66,9 @@ namespace EntityPostProcessor
 			);
 
 			curX += textureWidth;
-			postProcessor.SetupTexture(new Vector2Int(textureWidth, textureHeight), depth, filterMode);
+			postProcessor.SetupTexture(new Vector2Int(textureWidth, textureHeight), depth, filterMode, gameObject.name);
 			postProcessor.cullingMask = LayerMask.GetMask(layerName);
-			postProcessor.name = string.Format("{0}PostProcessor", gameObject.name);
+			postProcessor.name = string.Format("{0} PostProcessor", gameObject.name);
 
 			renderSource.transform.parent = postProcessor.transform;
 			renderSource.transform.localPosition = new Vector3(renderOuputLocalPosition.x, renderOuputLocalPosition.y, 10);
