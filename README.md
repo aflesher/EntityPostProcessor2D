@@ -38,22 +38,24 @@ A common technique to solve this problem is to use a multi camera setup that cap
 1. Drag this object into your Project hierarchy and delete it from the scene
 1. Assign this `EntityPostProcessor` prefab  to the `PostProcessor` field of the _Entity_ you previously created
 
+  _Note: An EntityPostProcessor prefab can be used by many/all of your Entity objects._
+
 ### Test it
 At this point when you run your scene your new Entity shold be displayed as if nothings changed. If you look at the Entity the RenderSouce should have be replaced with a Render Texture.
 
 ### Add some effects to your Entity
-Any scripts attached to your _EntityPostProcessor_ can apply post-processing effects to your entity using the `OnRenderImage` function. See the[docs](https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnRenderImage.html) for more details.
+Any scripts attached to your _EntityPostProcessor_ can apply post-processing effects to your entity using the `OnRenderImage` function. See the [docs](https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnRenderImage.html) for more details.
 
 To see a few sample effects you can attach `EntityPostProcessor2D/Examples/Scripts/EntityEffects` scripts to your _EntityPostProcessor_ prefab
 
 ### Troubleshooting
-**Issue** My character appears cut off
+**Issue** My character appears cut off  
 **Solution** Enable `Show Capture Rect` and then change the values of `Source Capture Offset` until the character fits within the blue box. Increase the `Render Texture Size` if needed.
 
-**Issue** A character appears twice on the screen
+**Issue** A character appears twice on the screen  
 **Solution** Make sure that your main camera and other cameras have the `EntityPostProcessor` layer removed the `Culling Mask`.
 
-**Issue** How do I refence the _RenderSource_ from the _Entity_ and vice versa?
+**Issue** How do I refence the _RenderSource_ from the _Entity_ and vice versa?  
 **Solution** Both components keep a reference to the other. If you have a attach a script `MyEntity` to your entity and a script `MyRenderSource` to your render source:
 `MyEntity`
 ```C#
