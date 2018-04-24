@@ -32,6 +32,19 @@ namespace EntityPostProcessor
 		{
 			playerRenderSource.animating = !playerRenderSource.animating;
 		}
+
+
+		public bool isAnimating {
+			get {
+				return playerRenderSource.animating;
+			}
+		}
+
+		public bool isDissolving {
+			get {
+				return !entityEffects.dissolveReady;
+			}
+		}
 	}
 
 }
