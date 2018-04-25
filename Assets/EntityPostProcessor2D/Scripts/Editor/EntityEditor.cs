@@ -11,10 +11,12 @@ namespace EntityPostProcessor
 
 		bool showAdvanced = false;
 		SerializedProperty postProcessor;
+		MonoScript script;
 
 		void OnEnable()
 		{
 			postProcessor = serializedObject.FindProperty("postProcessorRef");
+			script = MonoScript.FromMonoBehaviour((Entity)target);
 		}
 
 		public override void OnInspectorGUI()
@@ -22,6 +24,10 @@ namespace EntityPostProcessor
 			serializedObject.Update();
 
 			Entity entity = (Entity)target;
+
+			EditorGUI.BeginDisabledGroup(true);
+			script = EditorGUILayout.ObjectField("Script", script, typeof(MonoScript), false) as MonoScript;
+			EditorGUI.EndDisabledGroup();
 
 			EditorGUILayout.Space();
 			EditorGUILayout.LabelField("Render Output", EditorStyles.boldLabel);

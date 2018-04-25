@@ -108,3 +108,4 @@ MonoBehaviour:
   _colorEnable: 0
   _colorColor: {r: 1, g: 1, b: 1, a: 0.572}
   dissolveSpeed: 0.5
+  dissolveReady: 1
