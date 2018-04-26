@@ -50,7 +50,7 @@ namespace EntityPostProcessor
 
 			renderOutput = GameObject.CreatePrimitive(PrimitiveType.Quad);
 			renderOutputMeshRenderer = renderOutput.GetComponent<MeshRenderer>();
-			renderOutput.name = "RenderOutput";
+			renderOutput.name = "EntityRenderOutput";
 			renderOutput.GetComponent<MeshRenderer>().material = material;
 			renderOutput.transform.parent = gameObject.transform;
 

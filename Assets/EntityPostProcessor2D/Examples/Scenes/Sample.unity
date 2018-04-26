@@ -1525,7 +1525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3a2f0784f329243a0069a64a52ab94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entity: {fileID: 0}
+  entityController: {fileID: 0}
 --- !u!114 &1217609838
 MonoBehaviour:
   m_ObjectHideFlags: 0

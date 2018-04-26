@@ -6,7 +6,7 @@ namespace EntityPostProcessor
 {
 	[CustomEditor(typeof(EntityController))]
 	[CanEditMultipleObjects]
-	public class EntityEditor : Editor
+	public class EntityControllerEditor : Editor
 	{
 
 		bool showAdvanced = false;
