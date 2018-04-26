@@ -46,7 +46,7 @@ namespace EntityPostProcessor
 				return;
 			}
 
-			renderSource.entityController = this;
+			renderSource.controller = this;
 
 			renderOutput = GameObject.CreatePrimitive(PrimitiveType.Quad);
 			renderOutputMeshRenderer = renderOutput.GetComponent<MeshRenderer>();
