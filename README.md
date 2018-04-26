@@ -1,6 +1,6 @@
 # Entity Post-Processor 2D
 ## Description
-This tool allows developers to easily run filters and effects on multi-image or assembled mesh objects.
+This tool allows developers to easily run filters and effects on multi-image, assembled mesh or 3D objects.
 ## The Problem
 2D skeleton animation tools like Spine 2D are fantastic for creating 2D artwork in games. They allow for smooth animations while reducing the amount of assets required for each object. A drawback of these assets is that they are comprised of multiple images. Any effects that are applied to the asset are applied to the individual images and not the assembled mesh that you see on screen.
 
