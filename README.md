@@ -4,23 +4,35 @@ This tool allows developers to easily run filters and effects on multi-image or 
 ## The Problem
 2D skeleton animation tools like Spine 2D are fantastic for creating 2D artwork in games. They allow for smooth animations while reducing the amount of assets required for each object. A drawback of these assets is that they are comprised of multiple images. Any effects that are applied to the asset are applied to the individual images and not the assembled mesh that you see on screen.
 
-Let&apos;s take a look at an example of when this becomes an issue. Say you want to apply an outline effect. We start with following images:
+Let&apos;s take a look at an example of when this becomes an issue. Say you want to apply an outline effect. We start with following images
 
-which are assembled into the following mesh at runtime:
+![](https://imgur.com/QdiUxb2)
 
-when we attach a simple outline shader we get the following:
+which are assembled into the following mesh at runtime
 
-what we want is this:
+![](https://imgur.com/rEYrjZL)
+
+when we attach a simple outline shader we get the following
+
+![](https://imgur.com/v9iBY6T)
+
+what we want is this
+
+![](https://imgur.com/mKiwh2F)
 
 ## The Solution
-A common technique to solve this problem is to use a multi camera setup that captures the assembled mesh and renders it to a texture. This can be a lot to manage though. Entity Post-Processor 2D seeks to automate the setup and management of this multi camera solution for you.
+A common technique to solve this problem is to use a multi camera setup that captures the assembled mesh and renders it to a texture.
+
+![](https://imgur.com/0c5onka)
+
+This can be a lot to manage though. Entity Post-Processor 2D seeks to automate the setup and management of this multi camera solution for you.
 ## Getting Started
 ### Setup
 1. Create a new layer named `EntityPostProcessor`. You should treat this as a reserved layer and never directly add anything to it
 1. Remove this new layer your main camera _Culling Mask_.
   1. Select the Main Camera from your Scene Hierarchy
   1. Open the Culling Mask drop down in the camera component in the Inspector
-  1. Select _EntityPostProcessor_
+  1. Select _EntityPostProcessor_ to remove it from the _Culling Mask_
 
 ### Create an Entity
 1. Right click on the scene Hierarchy and select _EntityPostProcessor2D_->_Entity_
