@@ -11,12 +11,12 @@ namespace EntityPostProcessor
 
 		bool showAdvanced = false;
 		SerializedProperty postProcessor;
-		MonoScript script;
+		Texture headerTexture;
 
 		void OnEnable()
 		{
 			postProcessor = serializedObject.FindProperty("postProcessorRef");
-			script = MonoScript.FromMonoBehaviour((EntityController)target);
+			headerTexture = EditorTextures.ControllerHeader;
 		}
 
 		public override void OnInspectorGUI()
@@ -25,9 +25,12 @@ namespace EntityPostProcessor
 
 			EntityController entity = (EntityController)target;
 
-			EditorGUI.BeginDisabledGroup(true);
-			script = EditorGUILayout.ObjectField("Script", script, typeof(MonoScript), false) as MonoScript;
-			EditorGUI.EndDisabledGroup();
+			EditorGUILayout.Space();
+			var headerRect = GUILayoutUtility.GetRect(0.0f, 5.0f);
+			headerRect.width = headerTexture.width;
+			headerRect.height = headerTexture.height;
+			GUILayout.Space(headerRect.height);
+			GUI.DrawTexture(headerRect, headerTexture);
 
 			EditorGUILayout.Space();
 			EditorGUILayout.LabelField("Render Output", EditorStyles.boldLabel);
