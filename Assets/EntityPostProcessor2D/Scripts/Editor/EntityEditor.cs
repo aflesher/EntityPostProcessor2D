@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace EntityPostProcessor
 {
-	[CustomEditor(typeof(Entity))]
+	[CustomEditor(typeof(EntityController))]
 	[CanEditMultipleObjects]
 	public class EntityEditor : Editor
 	{
@@ -16,14 +16,14 @@ namespace EntityPostProcessor
 		void OnEnable()
 		{
 			postProcessor = serializedObject.FindProperty("postProcessorRef");
-			script = MonoScript.FromMonoBehaviour((Entity)target);
+			script = MonoScript.FromMonoBehaviour((EntityController)target);
 		}
 
 		public override void OnInspectorGUI()
 		{
 			serializedObject.Update();
 
-			Entity entity = (Entity)target;
+			EntityController entity = (EntityController)target;
 
 			EditorGUI.BeginDisabledGroup(true);
 			script = EditorGUILayout.ObjectField("Script", script, typeof(MonoScript), false) as MonoScript;

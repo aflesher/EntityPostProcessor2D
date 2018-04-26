@@ -11,6 +11,6 @@ namespace EntityPostProcessor
 	public class EntityRenderSource : MonoBehaviour
 	{
 		[HideInInspector]
-		public Entity entity;
+		public EntityController entityController;
 	}
 }

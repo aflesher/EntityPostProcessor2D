@@ -24,7 +24,7 @@ namespace EntityPostProcessor
 		// Use this for initialization
 		void Start()
 		{
-			entityEffects = player.GetComponent<Entity>().postProcessor.GetComponent<EntityEffects>();
+			entityEffects = player.GetComponent<EntityController>().postProcessor.GetComponent<EntityEffects>();
 
 			colorButtonText = colorButton.GetComponentInChildren<Text>();
 			toggleAnimationsButtonText = toggleAnimationsButton.GetComponentInChildren<Text>();

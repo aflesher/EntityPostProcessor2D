@@ -13,8 +13,8 @@ namespace EntityPostProcessor
 		// Use this for initialization
 		void Start()
 		{
-			entityEffects = GetComponent<Entity>().postProcessor.GetComponent<EntityEffects>();
-			playerRenderSource = GetComponent<Entity>().renderSource.GetComponent<PlayerRenderSource>();
+			entityEffects = GetComponent<EntityController>().postProcessor.GetComponent<EntityEffects>();
+			playerRenderSource = GetComponent<EntityController>().renderSource.GetComponent<PlayerRenderSource>();
 		}
 
 		// Update is called once per frame

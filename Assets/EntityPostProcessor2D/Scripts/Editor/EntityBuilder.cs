@@ -12,12 +12,12 @@ namespace EntityPostProcessor
 		static void CreateEntity()
 		{
 			GameObject gameObject = new GameObject("Entity");
-			gameObject.AddComponent<Entity>();
+			gameObject.AddComponent<EntityController>();
 
 			GameObject sourceObject = new GameObject("RenderSource");
 			sourceObject.transform.parent = gameObject.transform;
 			sourceObject.AddComponent<EntityRenderSource>();
-			gameObject.GetComponent<Entity>().material = new Material(Shader.Find("Sprites/Default"));
+			gameObject.GetComponent<EntityController>().material = new Material(Shader.Find("Sprites/Default"));
 
 			Selection.activeGameObject = gameObject;
 

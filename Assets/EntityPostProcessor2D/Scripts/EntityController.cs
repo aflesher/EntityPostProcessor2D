@@ -8,7 +8,7 @@ namespace EntityPostProcessor
 	/// Automatically creates a Camera -> RenderTexture setup for this entity so that
 	/// shaders and post processing effects can be applied to the gameObject as a whole.
 	/// </summary>
-	public class Entity : MonoBehaviour
+	public class EntityController : MonoBehaviour
 	{
 		public float pixelsPerUnit = 1;
 		public int sortingLayer = 0;
@@ -20,6 +20,7 @@ namespace EntityPostProcessor
 		EntityPostProcessor postProcessorRef;
 
 		public EntityPostProcessor postProcessor { get; private set; }
+
 		public EntityRenderSource renderSource { get; private set; }
 
 		public Vector2 renderOuputLocalPosition;
@@ -33,6 +34,7 @@ namespace EntityPostProcessor
 		static string layerName = "EntityPostProcessor";
 
 		public GameObject renderOutput { get; private set; }
+
 		MeshRenderer renderOutputMeshRenderer;
 
 		// Use this for initialization
@@ -44,7 +46,7 @@ namespace EntityPostProcessor
 				return;
 			}
 
-			renderSource.entity = this;
+			renderSource.entityController = this;
 
 			renderOutput = GameObject.CreatePrimitive(PrimitiveType.Quad);
 			renderOutputMeshRenderer = renderOutput.GetComponent<MeshRenderer>();
@@ -139,7 +141,7 @@ namespace EntityPostProcessor
 
 		/// <summary>
 		/// Activates/Deactivates the Post Processor GameObject. If autoEnableDisablePostProcessor is set to true this
-		/// will be automatically called when the entity gameobject is enabled or disabled.
+		/// will be automatically called when the EntityController gameobject is enabled or disabled.
 		/// </summary>
 		/// <param name="enabled">If set to <c>true</c> enabled.</param>
 		public void SetPostProcessorEnabled(bool enabled)
