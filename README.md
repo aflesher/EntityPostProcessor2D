@@ -6,24 +6,24 @@ This tool allows developers to easily run filters and effects on multi-image, as
 
 Let&apos;s take a look at an example of when this becomes an issue. Say you want to apply an outline effect. We start with following images
 
-![](https://i.imgur.com/QdiUxb2.png)
+![](https://i.imgur.com/fmsFNtl.png)
 
 which are assembled into the following mesh at runtime
 
-![](https://i.imgur.com/rEYrjZL.png)
+![](https://i.imgur.com/9MAxtaA.png)
 
 when we attach a simple outline shader we get the following
 
-![](https://i.imgur.com/v9iBY6T.png)
+![](https://i.imgur.com/5nQKAN2.png)
 
-what we want is this
+not only is there some clipping issues based on the bounds of our sample images but you can see that each individual piece is outlined. What we want is this
 
-![](https://i.imgur.com/mKiwh2F.png)
+![](https://i.imgur.com/ARaPFHj.png)
 
 ## The Solution
 A common technique to solve this problem is to use a multi camera setup that captures the assembled mesh and renders it to a texture.
 
-![](https://i.imgur.com/0c5onka.png)
+![](https://i.imgur.com/sabN1Uy.png)
 
 This can be a lot to manage though. Entity Post-Processor 2D seeks to automate the setup and management of this multi camera solution for you.
 ## Getting Started
