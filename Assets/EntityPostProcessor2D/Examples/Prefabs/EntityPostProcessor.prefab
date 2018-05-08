@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21484febb88c9420683084d5a9bee65b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _outlineColor: {r: 0.862069, g: 1, b: 0, a: 0.778}
+  _outlineColor: {r: 0.862069, g: 1, b: 0, a: 0.834}
   _outlineSize: 3.77
   _enableOutline: 1
   _dissolveEdgeColor: {r: 0.09731833, g: 0.5899953, b: 0.88235295, a: 0}
