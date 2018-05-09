@@ -160,6 +160,18 @@ namespace EntityPostProcessor
 			renderOutputMeshRenderer.enabled = visible;
 		}
 
+		/// <summary>
+		/// Calculates the real world rect space of the render output box
+		/// </summary>
+		/// <returns></returns>
+		public Rect RenderOutputRect()
+		{
+			Vector2 size = new Vector2(renderOutput.transform.localScale.x, renderOutput.transform.localScale.y);
+			Vector2 position = renderOutput.transform.position;
+
+			return new Rect(position.x - (size.x * .5f), position.y - (size.y * .5f), size.x, size.y);
+		}
+
 		void OnDestroy()
 		{
 			if (postProcessor != null) {
