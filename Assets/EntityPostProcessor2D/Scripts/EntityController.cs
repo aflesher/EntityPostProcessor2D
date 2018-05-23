@@ -60,6 +60,7 @@ namespace EntityPostProcessor
 			renderOutputMeshRenderer.sortingLayerID = sortingLayer;
 			renderOutput.transform.localPosition = renderSource.transform.localPosition - (Vector3)renderOuputLocalPosition;
 			renderOutput.transform.localScale = new Vector3(textureWidth / pixelsPerUnit, textureHeight / pixelsPerUnit, 1);
+			renderOutput.gameObject.layer = renderSource.gameObject.layer;
 
 			postProcessor = Instantiate(
 				postProcessorRef,
