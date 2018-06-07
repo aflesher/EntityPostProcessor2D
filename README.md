@@ -99,5 +99,11 @@ public class MyRenderSource : MonoBehaviour
     }
 }
 ```
+#### Issue
+I can't get 3rd party effects libraries like 2DxFX to work with this tool.
+#### Solution
+This tool renders your assets to a `MeshRenderer` + `MeshFilter "Quad"` and a lot of these effects expect a `SpriteRenderer`. So although they might not work out of the box it might be possible to modify them to work.
+
+With 2DxFX a lot effects simply require a search and replace on `SpriteRenderer` for `MeshRenderer` on the effect script file. Once you've done this attach the script to the `EntityRenderOutput` child object of your `EntityController` 
 
  
