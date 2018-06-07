@@ -17,7 +17,14 @@ namespace EntityPostProcessor
 			GameObject sourceObject = new GameObject("EntityRenderSource");
 			sourceObject.transform.parent = gameObject.transform;
 			sourceObject.AddComponent<EntityRenderSource>();
-			gameObject.GetComponent<EntityController>().material = new Material(Shader.Find("Sprites/Default"));
+
+			GameObject outputObject = GameObject.CreatePrimitive(PrimitiveType.Quad);
+			outputObject.name = "EntityRenderOutput";
+			outputObject.transform.parent = gameObject.transform;
+			outputObject.GetComponent<MeshRenderer>().material = new Material(Shader.Find("Sprites/Default"));
+			outputObject.AddComponent<EntityRenderOutput>();
+
+			GameObject.DestroyImmediate(outputObject.GetComponent<MeshCollider>());
 
 			Selection.activeGameObject = gameObject;
 

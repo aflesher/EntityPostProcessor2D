@@ -39,9 +39,7 @@ namespace EntityPostProcessor
 			int[] sortingLayerValues = sortingLayerNames.Select(l => SortingLayer.NameToID(l)).ToArray();
 			entity.sortingLayer = EditorGUILayout.IntPopup("Sorting Layer", entity.sortingLayer, sortingLayerNames, sortingLayerValues);
 
-
 			entity.orderInLayer = EditorGUILayout.IntField("Order In Layer", entity.orderInLayer);
-			entity.material = (Material)EditorGUILayout.ObjectField("Material", entity.material, typeof(Material), true);
 
 			EditorGUILayout.Space();
 			EditorGUILayout.LabelField("Render Capture", EditorStyles.boldLabel);

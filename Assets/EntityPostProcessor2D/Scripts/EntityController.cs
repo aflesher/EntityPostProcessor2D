@@ -13,7 +13,6 @@ namespace EntityPostProcessor
 		public float pixelsPerUnit = 1;
 		public int sortingLayer = 0;
 		public int orderInLayer = 0;
-		public Material material;
 		public int textureWidth = 128;
 		public int textureHeight = 128;
 		[SerializeField]
@@ -33,8 +32,8 @@ namespace EntityPostProcessor
 		static float curX;
 		static string layerName = "EntityPostProcessor";
 
-		public GameObject renderOutput { get; private set; }
-
+		[HideInInspector]
+		EntityRenderOutput renderOutput;
 		MeshRenderer renderOutputMeshRenderer;
 
 		// Use this for initialization
@@ -48,13 +47,18 @@ namespace EntityPostProcessor
 
 			renderSource.controller = this;
 
-			renderOutput = GameObject.CreatePrimitive(PrimitiveType.Quad);
+			// backwards compatibility
+			renderOutput = GetComponentInChildren<EntityRenderOutput>();
+			if (renderOutput == null) {
+				GameObject renderOutputGO = GameObject.CreatePrimitive(PrimitiveType.Quad);
+				renderOutputGO.AddComponent<EntityRenderOutput>();
+				renderOutput = renderOutputGO.GetComponent<EntityRenderOutput>();
+				renderOutput.transform.parent = transform;
+				renderOutput.GetComponent<MeshRenderer>().material = new Material(Shader.Find("Sprites/Default"));
+				renderOutput.name = "EntityRenderOutput";
+				GameObject.DestroyImmediate(renderOutput.GetComponent<MeshCollider>());
+			}
 			renderOutputMeshRenderer = renderOutput.GetComponent<MeshRenderer>();
-			renderOutput.name = "EntityRenderOutput";
-			renderOutput.GetComponent<MeshRenderer>().material = material;
-			renderOutput.transform.parent = gameObject.transform;
-
-			GameObject.DestroyImmediate(renderOutput.GetComponent<MeshCollider>());
 
 			renderOutputMeshRenderer.sortingOrder = orderInLayer;
 			renderOutputMeshRenderer.sortingLayerID = sortingLayer;
