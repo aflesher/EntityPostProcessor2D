@@ -2098,7 +2098,7 @@ GameObject:
   - component: {fileID: 1805272930}
   - component: {fileID: 1805272929}
   - component: {fileID: 1805272928}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EntityRenderOutput
   m_TagString: Untagged
   m_Icon: {fileID: 0}

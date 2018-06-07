@@ -12,7 +12,7 @@ namespace EntityPostProcessor
 
 		void OnEnable()
 		{
-			headerTexture = EditorTextures.RenderSourceHeader;
+			headerTexture = EditorTextures.RenderOutputHeader;
 		}
 
 		public override void OnInspectorGUI()

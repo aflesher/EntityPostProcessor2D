@@ -34,6 +34,7 @@ namespace EntityPostProcessor
 
 		[HideInInspector]
 		public EntityRenderOutput renderOutput { get; private set; }
+
 		MeshRenderer renderOutputMeshRenderer;
 
 		// Use this for initialization
@@ -57,6 +58,7 @@ namespace EntityPostProcessor
 				renderOutput.GetComponent<MeshRenderer>().material = new Material(Shader.Find("Sprites/Default"));
 				renderOutput.name = "EntityRenderOutput";
 				GameObject.DestroyImmediate(renderOutput.GetComponent<MeshCollider>());
+				renderOutput.gameObject.layer = renderSource.gameObject.layer;
 			}
 			renderOutput.controller = this;
 			renderOutputMeshRenderer = renderOutput.GetComponent<MeshRenderer>();
@@ -65,7 +67,6 @@ namespace EntityPostProcessor
 			renderOutputMeshRenderer.sortingLayerID = sortingLayer;
 			renderOutput.transform.localPosition = renderSource.transform.localPosition - (Vector3)renderOuputLocalPosition;
 			renderOutput.transform.localScale = new Vector3(textureWidth / pixelsPerUnit, textureHeight / pixelsPerUnit, 1);
-			renderOutput.gameObject.layer = renderSource.gameObject.layer;
 
 			postProcessor = Instantiate(
 				postProcessorRef,
