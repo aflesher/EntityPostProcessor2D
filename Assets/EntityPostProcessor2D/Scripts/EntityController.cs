@@ -33,7 +33,7 @@ namespace EntityPostProcessor
 		static string layerName = "EntityPostProcessor";
 
 		[HideInInspector]
-		EntityRenderOutput renderOutput;
+		public EntityRenderOutput renderOutput { get; private set; }
 		MeshRenderer renderOutputMeshRenderer;
 
 		// Use this for initialization
@@ -58,6 +58,7 @@ namespace EntityPostProcessor
 				renderOutput.name = "EntityRenderOutput";
 				GameObject.DestroyImmediate(renderOutput.GetComponent<MeshCollider>());
 			}
+			renderOutput.controller = this;
 			renderOutputMeshRenderer = renderOutput.GetComponent<MeshRenderer>();
 
 			renderOutputMeshRenderer.sortingOrder = orderInLayer;
