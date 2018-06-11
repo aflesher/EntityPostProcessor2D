@@ -19,14 +19,11 @@ namespace EntityPostProcessor
 			entityCamera = GetComponent<Camera>();
 		}
 
-		public LayerMask cullingMask
-		{
-			get
-			{
+		public LayerMask cullingMask {
+			get {
 				return entityCamera.cullingMask;
 			}
-			set
-			{
+			set {
 				entityCamera.cullingMask = value;
 			}
 		}
@@ -37,18 +34,18 @@ namespace EntityPostProcessor
 		/// <param name="size">The width and height of the texture in pixels.</param>
 		/// <param name="depth">The precision of the render texture's depth buffer in bits (0, 16, 24/32 are supported).</param>
 		/// <param name="filterMode">Filtering mode of the texture.</param>
+		/// <param name="pixelsPerUnit">Pixels per unit</param>
 		/// <param name="name">The name of the object.</param>
-		public void SetupTexture(Vector2Int size, int depth, FilterMode filterMode, string name)
+		public void SetupTexture(Vector2Int size, int depth, FilterMode filterMode, string name, float pixelsPerUnit)
 		{
-			renderTexture = new RenderTexture(size.x, size.y, depth)
-			{
+			renderTexture = new RenderTexture(size.x, size.y, depth) {
 				name = string.Format("{0} Target Texture", name),
 				filterMode = filterMode,
 				antiAliasing = QualitySettings.antiAliasing > 0 ? QualitySettings.antiAliasing : 1
 			};
 
 			entityCamera.targetTexture = renderTexture;
-			entityCamera.orthographicSize = size.y / 2;
+			entityCamera.orthographicSize = (size.y * pixelsPerUnit) / 2;
 		}
 	}
 }

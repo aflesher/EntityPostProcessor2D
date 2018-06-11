@@ -34,7 +34,7 @@ namespace EntityPostProcessor
 
 			EditorGUILayout.Space();
 			EditorGUILayout.LabelField("Render Output", EditorStyles.boldLabel);
-			entity.pixelsPerUnit = EditorGUILayout.FloatField("Pixels Per Unit", entity.pixelsPerUnit);
+			entity.outputScale = EditorGUILayout.FloatField("Scale", entity.outputScale);
 			string[] sortingLayerNames = SortingLayer.layers.Select(l => l.name).ToArray();
 			int[] sortingLayerValues = sortingLayerNames.Select(l => SortingLayer.NameToID(l)).ToArray();
 			entity.sortingLayer = EditorGUILayout.IntPopup("Sorting Layer", entity.sortingLayer, sortingLayerNames, sortingLayerValues);
@@ -43,6 +43,7 @@ namespace EntityPostProcessor
 
 			EditorGUILayout.Space();
 			EditorGUILayout.LabelField("Render Capture", EditorStyles.boldLabel);
+			entity.pixelsPerUnit = EditorGUILayout.FloatField("Pixels Per Unit", entity.pixelsPerUnit);
 			int[] textureSizeValues = { 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192 };
 			string[] textureSizeNames = textureSizeValues.Select(p => p.ToString()).ToArray();
 			EditorGUILayout.LabelField("Render Texture Size");

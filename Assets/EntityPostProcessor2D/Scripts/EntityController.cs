@@ -15,6 +15,7 @@ namespace EntityPostProcessor
 		public int orderInLayer = 0;
 		public int textureWidth = 128;
 		public int textureHeight = 128;
+		public float outputScale = 1;
 		[SerializeField]
 		EntityPostProcessor postProcessorRef;
 
@@ -66,16 +67,20 @@ namespace EntityPostProcessor
 			renderOutputMeshRenderer.sortingOrder = orderInLayer;
 			renderOutputMeshRenderer.sortingLayerID = sortingLayer;
 			renderOutput.transform.localPosition = renderSource.transform.localPosition - (Vector3)renderOuputLocalPosition;
-			renderOutput.transform.localScale = new Vector3(textureWidth / pixelsPerUnit, textureHeight / pixelsPerUnit, 1);
+			renderOutput.transform.localScale = new Vector3(
+				textureWidth * outputScale * pixelsPerUnit,
+				textureHeight * outputScale * pixelsPerUnit,
+				1
+			);
 
 			postProcessor = Instantiate(
 				postProcessorRef,
-				new Vector3(curX + (textureWidth * .5f) + 1, textureHeight * .5f, -10),
+				new Vector3(curX + (textureWidth * .5f * pixelsPerUnit) + 1, textureHeight * .5f * pixelsPerUnit, -10),
 				Quaternion.identity
 			);
 
-			curX += textureWidth;
-			postProcessor.SetupTexture(new Vector2Int(textureWidth, textureHeight), depth, filterMode, gameObject.name);
+			curX += textureWidth * pixelsPerUnit;
+			postProcessor.SetupTexture(new Vector2Int(textureWidth, textureHeight), depth, filterMode, gameObject.name, pixelsPerUnit);
 			postProcessor.cullingMask = LayerMask.GetMask(layerName);
 			postProcessor.name = string.Format("{0} PostProcessor", gameObject.name);
 
@@ -118,7 +123,7 @@ namespace EntityPostProcessor
 			}
 			if (showCaptureRect && _renderSource != null) {
 				Gizmos.color = Color.blue;
-				Vector2 size = new Vector2((textureWidth * .5f), (textureHeight * .5f));
+				Vector2 size = new Vector2(textureWidth * .5f * pixelsPerUnit, textureHeight * .5f * pixelsPerUnit);
 				float xMin = -size.x - renderOuputLocalPosition.x + _renderSource.transform.position.x;
 				float yMin = -size.y - renderOuputLocalPosition.y + _renderSource.transform.position.y;
 				float xMax = size.x - renderOuputLocalPosition.x + _renderSource.transform.position.x;
